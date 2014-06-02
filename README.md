@@ -29,22 +29,25 @@ uninstall
 Usage
 -----
 after install vtapi:
+```python
+import vtapi
 
-    import vtapi
-    vt = vtapi.VtApi("PUT YOUR VIRUSTOTAL PUBLIC KEY HERE")
+vt = vtapi.VtApi("PUT YOUR VIRUSTOTAL PUBLIC KEY HERE")
     
-    # rating for url
-    print(vt.rating("google.com"))
-    # you shold get return ('google.com', 0, 52)
-    # 0 and 52 means 0 virus detected number by 52 virus scan engines
-    # the higher the detected number, the more likely malicious it is.
-    
-    # rating for file
-    print(vt.rating("/tmp/path/to/file"))
-    # for the privacy sake, i don't send any file to virustotal
-    # just query if there is the same file in virustotal
-    # you should keep in mind don't send any secret files to virustotal.
-    
-    # rating by file's md5/sha1/sha256
-    print(vt.rating("/tmp/path/to/file"))
-    # query by the hash, return none if there doesn't exist.
+# rating for url
+# you shold get return ('google.com', 0, 52)
+# 0 and 52 means 0 virus detected number by 52 virus scan engines
+# the higher the detected number, the more likely malicious it is.
+print(vt.rating("google.com"))
+
+
+# rating for file
+# for the privacy sake, i don't send any file to virustotal
+# just query if there is the same file in virustotal
+# you should keep in mind don't send any secret files to virustotal.
+print(vt.rating("/tmp/path/to/file"))
+
+# rating by file's md5/sha1/sha256
+# query by the hash, return none if there doesn't exist.
+print(vt.rating("/tmp/path/to/file"))
+```
