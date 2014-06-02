@@ -1,6 +1,12 @@
 VirustotalAPI
 -------------
-The python library that implement Virustotal public API 2.0
+This python module help you check if the URL or file is malicious through Virustotal public API 2.0
+
+you can get more infomation at https://www.virustotal.com/en/documentation/public-api/
+
+To use this module you need to apply an account and get a public api key at https://www.virustotal.com/
+
+[![Screenshot](vtapi_screenshot.jpg)](https://raw.githubusercontent.com/z-sean-huang/VirustotalAPI/master/vtapi_screenshot.jpg)
 
 Dependency
 ----------
@@ -39,15 +45,19 @@ vt = vtapi.VtApi("PUT YOUR VIRUSTOTAL PUBLIC KEY HERE")
 # 0 and 52 means 0 virus detected number by 52 virus scan engines
 # the higher the detected number, the more likely malicious it is.
 print(vt.rating("google.com"))
+# get url scan report from virustotal
+print(vt.rul_report("google.com"))
 
 
 # rating for file
-# for the privacy sake, i don't send any file to virustotal
+# for the privacy sake, I don't send any file to virustotal
 # just query if there is the same file in virustotal
 # you should keep in mind don't send any secret files to virustotal.
-print(vt.rating("/tmp/path/to/file"))
+print(vt.rating("/PATH/TO/FILE"))
 
 # rating by file's md5/sha1/sha256
 # query by the hash, return none if there doesn't exist.
 print(vt.rating("HASH_OF_FILE"))
+# get file scan report from virustotal
+print(vt.file_report("HASH_OF_FILE"))
 ```
