@@ -49,5 +49,5 @@ print(vt.rating("/tmp/path/to/file"))
 
 # rating by file's md5/sha1/sha256
 # query by the hash, return none if there doesn't exist.
-print(vt.rating("/tmp/path/to/file"))
+print(vt.rating("HASH_OF_FILE"))
 ```
