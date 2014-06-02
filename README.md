@@ -1,4 +1,4 @@
-VirsutotalAPI2
+VirustotalAPI
 ==============
 
-This is python library that implement Virustotal public API 2.0.
+The python library that implement Virustotal public API 2.0
