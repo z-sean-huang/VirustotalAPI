@@ -2,6 +2,11 @@ VirustotalAPI
 -------------
 The python library that implement Virustotal public API 2.0
 
+Dependency
+----------
+you need install python `requests` first
+
+    pip install requests
 
 Installation
 ------------
