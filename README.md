@@ -32,7 +32,24 @@ uninstall
 
 Usage
 -----
-after install vtapi:
+examples as command tool:
+
+help
+
+    python vtapi.py --help [-h]
+
+url report
+
+    python vtapi.py google.com
+
+file report
+
+    python vtapi.py /bin/ping
+or
+
+    python vtapi.py 7b36e9a3418f2c99de9652c0d87ea36dba3da7a2
+
+examples as library:
 ```python
 import vtapi
 
