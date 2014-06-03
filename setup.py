@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='vtapi',
-      version='1.4.0',
+      version='1.4.1',
       description='this library implement virustotal api v2.0',
       author='z.sean.huang',
       author_email='z.sean.huang@gmail.com',
