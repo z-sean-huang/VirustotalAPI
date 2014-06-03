@@ -32,7 +32,7 @@ uninstall
 
 Usage
 -----
-examples as command tool:
+###examples as command tool:
 
 help
 
@@ -49,7 +49,7 @@ or
 
     python vtapi.py 7b36e9a3418f2c99de9652c0d87ea36dba3da7a2
 
-examples as library:
+###examples as library:
 ```python
 import vtapi
 
