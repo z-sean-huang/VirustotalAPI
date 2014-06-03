@@ -9,6 +9,9 @@ USAGE:
 
     (3) rating HASH:
         python vtapi.py 7b36e9a3418f2c99de9652c0d87ea36dba3da7a2
+
+    (4) help:
+        python vtapi.py --help [-h]
 """
 import logging
 logger = logging
@@ -173,6 +176,9 @@ def main():
 
     try:
         sScan = sys.argv[1]
+        if sScan in ["-h", "--help"]:
+            print(__doc__)
+            return
     except:
         print(__doc__)
         return
