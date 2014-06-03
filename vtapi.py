@@ -164,7 +164,7 @@ class VtApi(object):
 
 def main():
     import json
-    logging.basicConfig(level=logging.ERROR, stream=sys.error)
+    logging.basicConfig(level=logging.ERROR, stream=sys.stderr)
 
 
     #APIKEY = "PUT_YOUR_PUBLIC_KEY_HERE"
