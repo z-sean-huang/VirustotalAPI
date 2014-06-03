@@ -1,6 +1,17 @@
 #!/usr/bin/env python
+"""
+USAGE:
+    (1) rating URL:
+        python vtapi.py google.com
+
+    (2) rating FILE:
+        python vtapi.py /bin/ping
+
+    (3) rating HASH:
+        python vtapi.py 7b36e9a3418f2c99de9652c0d87ea36dba3da7a2
+"""
 import logging
-logger = logging.getLogger()
+logger = logging
 import os
 import sys
 import requests
@@ -83,7 +94,7 @@ class VtApi(object):
 
 
     @staticmethod
-    def __is_hash(sHash):
+    def is_hash(sHash):
         # check for md1, sha1, sha256
         if len(sHash) not in [32, 40, 64]:
             return False
@@ -93,14 +104,14 @@ class VtApi(object):
 
 
     @staticmethod
-    def __is_file(sPath):
+    def is_file(sPath):
         if os.path.isfile(sPath):
             return True
         return False
 
 
     @staticmethod
-    def __is_url(sUrl):
+    def is_url(sUrl):
         if not sUrl:
             return False
         import re
@@ -116,46 +127,59 @@ class VtApi(object):
 
 
     def rating(self, sScan):
+        dReport = self.report(sScan)
+        if not dReport:
+            return None
+
         try:
-            if self.__is_file(sScan):
-                sScan = hashlib.md5(open(sScan).read()).hexdigest()
-
-            if self.__is_hash(sScan):
-                dReport = self.file_report(sScan)
-            elif self.__is_url(sScan):
-                dReport = self.url_report(sScan)
-            else:
-                return None
-
-            # case if sample or url doesn't have records in Virustotal
-            if not dReport:
-                return None
-
-            iHit = dReport["positives"]
-            iTotal = dReport["total"]
-            return (sScan, iHit, iTotal)
-
+            iPos = dReport["positives"]
+            sLink = dReport.get("permalink", "")
         except:
             logger.exception("fail rating() sScan=[%s]", sScan)
             return None
 
+        return (iPos, sLink)
+
+
+    def report(self, sScan):
+        try:
+            if self.is_file(sScan):
+                sScan = hashlib.md5(open(sScan).read()).hexdigest()
+            if self.is_hash(sScan):
+                dReport = self.file_report(sScan)
+            elif self.is_url(sScan):
+                dReport = self.url_report(sScan)
+            else:
+                return None
+         
+            # case if sample or url doesn't have records in Virustotal
+            if not dReport:
+                return None
+
+            return dReport
+        except:
+            logger.exception("fail report() sScan=[%s]", sScan)
+            return None
+
 
 def main():
-    # testing function
-    logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
+    import json
+    logging.basicConfig(level=logging.ERROR, stream=sys.error)
 
-    # you can apply a free public api key thourgh https://www.virustotal.com/ and click "Join our community"
-    APIKEY = "PUT YOUR PUBLIC APIKEY HERE"
+
+    #APIKEY = "PUT_YOUR_PUBLIC_KEY_HERE"
+    # you can apply a free public api key at https://www.virustotal.com/
+    APIKEY = "a90537cb88de70dcd81830bf602524055b7d3174f62322c36da9266f48d13638"
+
+    try:
+        sScan = sys.argv[1]
+    except:
+        print(__doc__)
+        return
 
     vt = VtApi(APIKEY)
-
-    sHash = "481d2a43b048d139a1f08254ba68e4ec01a06a29"
-    sDomain = "google.com.tw"
-    sPath = "C:\MP4debug.log"
-
-    print(vt.rating(sHash))
-    print(vt.rating(sDomain))
-    print(vt.rating(sPath))
+    dReport = json.dumps(vt.report(sScan), indent=2)
+    print(dReport)
 
 
 if __name__ == '__main__':

@@ -39,10 +39,12 @@ import vtapi
 vt = vtapi.VtApi("PUT YOUR VIRUSTOTAL PUBLIC KEY HERE")
     
 # rating for url
-# you shold get return ('google.com', 0, 52)
-# 0 and 52 means 0 virus detected number by 52 virus scan engines
-# the higher the detected number, the more likely malicious it is.
 print(vt.rating("google.com"))
+# In this case, you shold get
+# (0, "https://www.virustotal.com/en/url/cf4b367e49bf0b22041c6f065f4aa19f3cfe39c8d5abc0617343d1a66c6a26f5/analysis/")
+# 0 means its detected number by virus scan engines
+# the higher the detected number, the more likely malicious it is.
+
 # get url scan report from virustotal
 print(vt.rul_report("google.com"))
 
@@ -54,8 +56,9 @@ print(vt.rul_report("google.com"))
 print(vt.rating("/PATH/TO/FILE"))
 
 # rating by file's md5/sha1/sha256
-# query by the hash, return none if there doesn't exist.
+# query by the hash, return none if it doesn't exist.
 print(vt.rating("HASH_OF_FILE"))
+
 # get file scan report from virustotal
 print(vt.file_report("HASH_OF_FILE"))
 ```
