@@ -10,9 +10,7 @@ To use this module you need to apply an account and get a public api key at http
 
 Dependency
 ----------
-you need install python `requests` first
-
-    pip install requests
+    python library `requests`
 
 Installation
 ------------
