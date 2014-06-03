@@ -10,7 +10,7 @@ To use this module you need to apply an account and get a public api key at http
 
 Dependency
 ----------
-    python library `requests`
+python [`requests`](https://github.com/kennethreitz/requests)
 
 Installation
 ------------
